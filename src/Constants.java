@@ -53,6 +53,7 @@ public abstract class Constants
 	/** The maximum number of milliseconds between each time a new customer arrives */
 	public final static int MAX_DOORMAN_SLEEP = 5900;
 
+
 	// Hides the constructor.
 	private Constants(){}
 

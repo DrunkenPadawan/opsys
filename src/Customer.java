@@ -14,13 +14,15 @@ public class Customer {
 	private int customerID;
 	/** An integer specifying the look of this customer, used by the GUI only */
 	private int customerLook;
+	private int waitingRoomSeat;
 
 	/**
 	 * Creates a new customer, giving him a unique ID and a random look.
 	 */
-	public Customer() {
+	public Customer(int waitingRoomSeat) {
 		customerID = ++nextID;
 		customerLook = (int)(Math.random() * Constants.NOF_CUSTOMER_LOOKS);
+		this.waitingRoomSeat = waitingRoomSeat;
 	}
 
 	/**
@@ -29,6 +31,10 @@ public class Customer {
 	 */
 	public int getCustomerID() {
 		return customerID;
+	}
+
+	public int getWaitingRoomSeat() {
+		return waitingRoomSeat;
 	}
 
 	/**
