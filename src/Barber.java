@@ -41,4 +41,3 @@ public class Barber implements Runnable {
 	// Add more methods as needed
 }
 
-//oakdpokasdopkaspo kopasda
