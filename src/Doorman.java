@@ -22,8 +22,6 @@ public class Doorman implements Runnable {
         this.gui = gui;
         thread = new Thread(this);
         gui.println("A doorman thread was created");
-
-        // Incomplete
 	}
 
 	/**

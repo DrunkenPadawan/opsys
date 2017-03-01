@@ -31,7 +31,7 @@ public class Barber implements Runnable {
 	@Override
 	public void run(){
 		while (running){
-		    gui.println("barb "+ barbID + "running"); //hvis denne linjen fjernes så fucker threadsa seg opp
+		    gui.println("Barb "+ barbID + " running."); //hvis denne linjen fjernes så fucker threadsa seg opp
 			if(queue.isAvailableCustomer()){
 			    int customerSeatPosition = queue.getSeatPositionOfLongestAwaitingCustomer();
 			    if(customerSeatPosition==-1){
@@ -39,7 +39,7 @@ public class Barber implements Runnable {
                 }
                 else{
                     Customer customerToBeCut = queue.popCustomer(customerSeatPosition);
-                    gui.println("Barb "+barbID+" cuts cust from pos:" +customerSeatPosition+ ", id:"+customerToBeCut.getCustomerID() );
+                    gui.println("Barb "+barbID+" cuts from seat: " +customerSeatPosition+ ", id: "+customerToBeCut.getCustomerID() );
 
                     gui.emptyLoungeChair(customerSeatPosition);
                     gui.fillBarberChair(barbID,customerToBeCut);
@@ -49,7 +49,7 @@ public class Barber implements Runnable {
                     try {
                         Thread.sleep(cutTime);
                     } catch (InterruptedException e) {
-
+                        gui.println("Exception for cut sleep: " + e);
                     }
 
                     //release customer
@@ -60,7 +60,7 @@ public class Barber implements Runnable {
                     try {
                         Thread.sleep(dayDreamTime);
                     } catch (InterruptedException e) {
-
+                        gui.println("Exception for dream sleep: " + e);
                     }
                     gui.barberIsAwake(barbID);
                 }
