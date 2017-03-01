@@ -40,14 +40,14 @@ public class Doorman implements Runnable {
                 Customer newCustomer = new Customer(openSeatPosition);
                 customerQueue.addCustomer(newCustomer);
                 gui.fillLoungeChair(openSeatPosition, newCustomer);
-                gui.println("Added to wait at pos:"+newCustomer.getWaitingRoomSeat()+", id:"+newCustomer.getCustomerID());
+                gui.println("Added to wait at seat: " + newCustomer.getWaitingRoomSeat() + ", id:" + newCustomer.getCustomerID());
             }
             try{
-                long sleepTime = getRandomSleep(Constants.MIN_DOORMAN_SLEEP,Globals.doormanSleep);
+                long sleepTime = getRandomSleep(Constants.MIN_DOORMAN_SLEEP, Globals.doormanSleep);
                 thread.sleep(sleepTime);
             }
             catch (InterruptedException e){
-
+                gui.println("Exception for doorman sleep: " + e);
             }
 
         }
