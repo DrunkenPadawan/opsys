@@ -206,7 +206,12 @@ public class BarbershopGui extends JFrame implements Gui, ChangeListener {
 	 * @param customer	The customer that is sitting in that chair.
 	 */
 	public void fillLoungeChair(int pos, Customer customer) {
-		roomPanel.fillLoungeChair(pos, customer);
+		try {
+			roomPanel.fillLoungeChair(pos, customer);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			println("pos:"+pos);
+			throw new ArrayIndexOutOfBoundsException();
+		}
 		repaint();
 	}
 

@@ -10,53 +10,69 @@ public class CustomerQueue {
 	 * @param queueLength	The maximum length of the queue.
 	 * @param gui			A reference to the GUI interface.
 	 */
+	Customer[] theCustomers;
+	int waitedTheLongestIndex=0;
+	int nextPositionToInsertIndex;
 
-	PriorityQueue<Integer> openSeatsQueue;
-	PriorityQueue<Customer> customerQueue;
-
+    public int getNextPositionToInsertIndex() {
+        return nextPositionToInsertIndex;
+    }
     public CustomerQueue(int queueLength, Gui gui) {
-
-		openSeatsQueue = new PriorityQueue<>(queueLength);
-		for(int i = 0; i<Constants.NOF_CHAIRS;i++) {
-			openSeatsQueue.add(i);
-		}
-        customerQueue = new PriorityQueue<>(queueLength, Comparator.comparingInt(Customer::getCustomerID));
         gui.println("Queue for open seats made");
-	}
-
-	public void addCustomer(Customer customer) {
-        customerQueue.add(customer);
+        theCustomers = new Customer[18];
     }
-    public int getSeatPositionOfLongestAwaitingCustomer(){
-        if(customerQueue.size()>0){
-            return customerQueue.peek().getWaitingRoomSeat();
+
+	public void addCustomer(Customer newCustomer) {
+
+        theCustomers[nextPositionToInsertIndex]=newCustomer;
+        if (nextPositionToInsertIndex == 17) {
+            nextPositionToInsertIndex = 0;
         }
-        else {
-            return -1;
+        else{
+            nextPositionToInsertIndex++;
         }
     }
-
-    public Customer popCustomer(int position) {
-        openSeatsQueue.add(position);
-        return customerQueue.poll();
-    }
-	public int getNextOpenSeat(){
-		return openSeatsQueue.poll();
-
-	}
-
-	public Customer next() {
-
-		// Inclomplete
-		return null;
-	}
 	public boolean isOpenSeat(){
-    	return openSeatsQueue.size()>0;
-	}
-
-    public boolean isAvailableCustomer() {
-	    return openSeatsQueue.size()!=18;
+        return isCustomerAtPositionExist(nextPositionToInsertIndex);
     }
+	public boolean isCustomerAtPositionExist(int pos){
+        Customer c = theCustomers[pos];
+        if (c == null){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public Customer getCustomerFromQueueIfAvailable(){
+	    synchronized (this){
+	        //customer is available
+            if (isCustomerAtPositionExist(waitedTheLongestIndex)) {
+
+                Customer toCut = theCustomers[waitedTheLongestIndex];
+                System.out.println("Tried to get custoemr at pos:"+waitedTheLongestIndex);
+                if (toCut == null) {
+                    throw new RuntimeException();
+                }
+                toCut.setWaitingRoomSeat(waitedTheLongestIndex);
+
+                theCustomers[waitedTheLongestIndex] = null;
+                if(waitedTheLongestIndex==17){
+                    waitedTheLongestIndex = 0;
+                }
+                else{
+                    waitedTheLongestIndex++;
+                }
+
+                return toCut;
+            }
+            else{
+
+                return null;
+            }
+        }
+    }
+
 
 	// Add more methods as needed
 }

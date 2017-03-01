@@ -31,42 +31,38 @@ public class Barber implements Runnable {
 	@Override
 	public void run(){
 		while (running){
-		    gui.println("Barb "+ barbID + " running."); //hvis denne linjen fjernes så fucker threadsa seg opp
-			if(queue.isAvailableCustomer()){
-			    int customerSeatPosition = queue.getSeatPositionOfLongestAwaitingCustomer();
-			    if(customerSeatPosition==-1){
-			        gui.println("BAD CODING"); //prøv å finn en løsning på dette
-                }
-                else{
-                    Customer customerToBeCut = queue.popCustomer(customerSeatPosition);
-                    gui.println("Barb "+barbID+" cuts from seat: " +customerSeatPosition+ ", id: "+customerToBeCut.getCustomerID() );
+            Customer customerToCut = queue.getCustomerFromQueueIfAvailable();
+            if(customerToCut != null){
+                gui.emptyLoungeChair(customerToCut.getWaitingRoomSeat());
+                gui.fillBarberChair(barbID,customerToCut);
 
-                    gui.emptyLoungeChair(customerSeatPosition);
-                    gui.fillBarberChair(barbID,customerToBeCut);
-
-                    //cut customer
-                    long cutTime = Doorman.getRandomSleep(Constants.MIN_BARBER_WORK, Globals.barberWork);
-                    try {
-                        Thread.sleep(cutTime);
-                    } catch (InterruptedException e) {
-                        gui.println("Exception for cut sleep: " + e);
-                    }
-
-                    //release customer
-                    gui.emptyBarberChair(barbID);
-                    gui.barberIsSleeping(barbID);
-                    //daydream
-                    long dayDreamTime = Doorman.getRandomSleep(Constants.MIN_BARBER_SLEEP,Globals.barberSleep);
-                    try {
-                        Thread.sleep(dayDreamTime);
-                    } catch (InterruptedException e) {
-                        gui.println("Exception for dream sleep: " + e);
-                    }
-                    gui.barberIsAwake(barbID);
+                long cutTime = Doorman.getRandomSleep(Constants.MIN_BARBER_WORK, Globals.barberWork);
+                try {
+                    Thread.sleep(Globals.barberWork);
+                } catch (InterruptedException e) {
+                    gui.println("Exception for cut sleep: " + e);
                 }
 
-			}
+                //release customer
+                gui.emptyBarberChair(barbID);
+                gui.barberIsSleeping(barbID);
+                //daydream
+                //long dayDreamTime = Doorman.getRandomSleep(Constants.MIN_BARBER_SLEEP,Globals.barberSleep);
+                try {
+                    Thread.sleep(Globals.barberSleep);
+                } catch (InterruptedException e) {
+                    gui.println("Exception for dream sleep: " + e);
+                }
+                gui.barberIsAwake(barbID);
 
+            }
+            else {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                }
+
+            }
 
 
 		}

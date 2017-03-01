@@ -19,9 +19,12 @@ public class Customer {
 	/**
 	 * Creates a new customer, giving him a unique ID and a random look.
 	 */
-	public Customer(int waitingRoomSeat) {
+	public Customer() {
 		customerID = ++nextID;
 		customerLook = (int)(Math.random() * Constants.NOF_CUSTOMER_LOOKS);
+	}
+
+	public void setWaitingRoomSeat(int waitingRoomSeat) {
 		this.waitingRoomSeat = waitingRoomSeat;
 	}
 

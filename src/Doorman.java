@@ -35,16 +35,15 @@ public class Doorman implements Runnable {
 
         while (running){
             //gui.println("Doorman doing some doormaning");
-            if(customerQueue.isOpenSeat()){
-                int openSeatPosition = customerQueue.getNextOpenSeat();
-                Customer newCustomer = new Customer(openSeatPosition);
+            if(customerQueue.isOpenSeat()){;
+                Customer newCustomer = new Customer();
+                gui.fillLoungeChair(customerQueue.getNextPositionToInsertIndex(),newCustomer );
                 customerQueue.addCustomer(newCustomer);
-                gui.fillLoungeChair(openSeatPosition, newCustomer);
                 gui.println("Added to wait at seat: " + newCustomer.getWaitingRoomSeat() + ", id:" + newCustomer.getCustomerID());
             }
             try{
                 long sleepTime = getRandomSleep(Constants.MIN_DOORMAN_SLEEP, Globals.doormanSleep);
-                thread.sleep(sleepTime);
+                thread.sleep(Globals.doormanSleep);
             }
             catch (InterruptedException e){
                 gui.println("Exception for doorman sleep: " + e);
