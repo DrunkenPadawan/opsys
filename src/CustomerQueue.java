@@ -28,7 +28,6 @@ public class CustomerQueue {
         customerQueue.add(customer);
     }
     public int getSeatPositionOfLongestAwaitingCustomer(){
-        Customer nextCustomerToGetCut;
         if(customerQueue.size()>0){
             return customerQueue.peek().getWaitingRoomSeat();
         }
