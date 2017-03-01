@@ -56,7 +56,7 @@ public class Barber implements Runnable {
                     gui.emptyBarberChair(barbID);
                     gui.barberIsSleeping(barbID);
                     //daydream
-                    long dayDreamTime = Doorman.getRandomSleep(Constants.MIN_BARBER_SLEEP,Globals.barberSleep);
+                    long dayDreamTime = Doorman.getRandomSleep(Constants.MIN_BARBER_SLEEP, Globals.barberSleep);
                     try {
                         Thread.sleep(dayDreamTime);
                     } catch (InterruptedException e) {
