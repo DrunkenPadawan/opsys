@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -47,12 +48,13 @@ public class CustomerQueue {
     public Customer getCustomerFromQueueIfAvailable(){
 	    synchronized (this){
 	        //customer is available
-            if (isCustomerAtPositionExist(waitedTheLongestIndex)) {
+            if (true) {
+                System.out.println("Found customer");
 
                 Customer toCut = theCustomers[waitedTheLongestIndex];
                 System.out.println("Tried to get custoemr at pos:"+waitedTheLongestIndex);
                 if (toCut == null) {
-                    throw new RuntimeException();
+                    return null;
                 }
                 toCut.setWaitingRoomSeat(waitedTheLongestIndex);
 
@@ -67,6 +69,7 @@ public class CustomerQueue {
                 return toCut;
             }
             else{
+                System.out.println("No customers were found at position:"+waitedTheLongestIndex+", "+ Arrays.toString(theCustomers));
 
                 return null;
             }
