@@ -1,4 +1,4 @@
-import java.util.PriorityQueue;
+package P2;
 
 /**
  * This class implements the doorman's part of the

@@ -1,3 +1,5 @@
+package P2;
+
 /**
  * This class implements the barber's part of the
  * Barbershop thread synchronization example.

@@ -1,6 +1,6 @@
+package P2;
+
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.PriorityQueue;
 
 /**
  * This class implements a queue of customers as a circular buffer.

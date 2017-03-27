@@ -1,3 +1,5 @@
+package P2;
+
 /**
  * Constants used by the GUI.
  *
