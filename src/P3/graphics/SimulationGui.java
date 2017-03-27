@@ -1,7 +1,7 @@
 package P3.graphics;
 
-import round_robin.Process;
-import round_robin.Simulator;
+import P3.Process;
+import P3.Simulator;
 
 import java.awt.*;
 import java.awt.event.*;

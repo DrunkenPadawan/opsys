@@ -1,6 +1,6 @@
 package P3;
 
-import round_robin.graphics.SimulationGui;
+import P3.graphics.SimulationGui;
 
 import java.io.BufferedReader;
 import java.io.IOException;

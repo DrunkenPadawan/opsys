@@ -3,6 +3,7 @@ package P3;
 import java.lang.*;
 import java.util.LinkedList;
 import java.util.function.Consumer;
+import java.util.*;
 
 /**
  * The main class of the P3 exercise. This class is only partially complete.
@@ -10,9 +11,9 @@ import java.util.function.Consumer;
 public class Simulator
 {
 	/** Process queues */
-	private LinkedList<Process> memoryQueue = new LinkedList<>();
-	private LinkedList<Process> cpuQueue = new LinkedList<>();
-	private LinkedList<Process> ioQueue = new LinkedList<>();
+	private Queue<Process> memoryQueue = new LinkedList<>();
+	private Queue<Process> cpuQueue = new LinkedList<>();
+	private Queue<Process> ioQueue = new LinkedList<>();
 
 	/** The queue of events to come */
     private EventQueue eventQueue = new EventQueue();
