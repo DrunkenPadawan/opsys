@@ -34,7 +34,9 @@ public class Cpu {
      */
     public Event insertProcess(Process p, long clock) {
         this.cpuQueue.add(p);
-        //sjekk om cpu e idle, activate first return null if not
+        if(isIdle()){
+            return switchProcess(clock);
+        }
         return null;
     }
 
@@ -47,7 +49,16 @@ public class Cpu {
      *				or null	if no process was activated.
      */
     public Event switchProcess(long clock) {
-        // Incomplete
+        if(!this.cpuQueue.isEmpty()){
+            if(!isIdle()){
+                Process activeProcess = getActiveProcess();
+                this.cpuQueue.add(activeProcess);
+            }
+            Process newActiveProcess = this.cpuQueue.peek();
+            this.cpuQueue.remove(newActiveProcess);
+            //make activeprocess active
+            return activeProcessLeft(clock);
+        }
         return null;
     }
 
