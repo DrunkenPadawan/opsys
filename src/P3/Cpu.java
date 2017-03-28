@@ -14,9 +14,10 @@ public class Cpu {
      * @param maxCpuTime	The Round Robin time quant to be used.
      * @param statistics	A reference to the statistics collector.
      */
-    private Queue<Process> cpuQueue;
+    private LinkedList<Process> cpuQueue;
     private Statistics statistics;
     private long maxCpuTime;
+    private Process activeProcess;
 
     public Cpu(LinkedList<Process> cpuQueue, long maxCpuTime, Statistics statistics) {
         this.cpuQueue = cpuQueue;
@@ -51,12 +52,13 @@ public class Cpu {
     public Event switchProcess(long clock) {
         if(!this.cpuQueue.isEmpty()){
             if(!isIdle()){
-                Process activeProcess = getActiveProcess();
+                Process previousActiveProcess = getActiveProcess();
                 this.cpuQueue.add(activeProcess);
             }
-            Process newActiveProcess = this.cpuQueue.peek();
-            this.cpuQueue.remove(newActiveProcess);
+            activeProcess = this.cpuQueue.peek();
+            this.cpuQueue.remove(activeProcess);
             //make activeprocess active
+
             return activeProcessLeft(clock);
         }
         return null;
@@ -78,11 +80,12 @@ public class Cpu {
      * @return	The process currently using the CPU.
      */
     public Process getActiveProcess() {
-        // Incomplete
-        return null;
+        Process currentActiveProcess = this.activeProcess;
+        this.activeProcess = null; //mulig dette ikke skal gjøres
+        return currentActiveProcess;
     }
 
-    public boolean isIdle(){
+    private boolean isIdle(){
         return this.getActiveProcess() == null;
     }
 
@@ -91,7 +94,7 @@ public class Cpu {
      * @param timePassed	The amount of time that has passed since the last call to this method.
      */
     public void timePassed(long timePassed) {
-        // Incomplete
+
     }
 
 }
