@@ -11,9 +11,9 @@ import java.util.*;
 public class Simulator
 {
 	/** Process queues */
-	private Queue<Process> memoryQueue = new LinkedList<>();
-	private Queue<Process> cpuQueue = new LinkedList<>();
-	private Queue<Process> ioQueue = new LinkedList<>();
+	private LinkedList<Process> memoryQueue = new LinkedList<>();
+	private LinkedList<Process> cpuQueue = new LinkedList<>();
+	private LinkedList<Process> ioQueue = new LinkedList<>();
 
 	/** The queue of events to come */
     private EventQueue eventQueue = new EventQueue();

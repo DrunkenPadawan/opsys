@@ -22,7 +22,7 @@ class QueuePanel extends JPanel {
     /** The direction in which the queue is drawn. */
     private Direction direction;
 
-    QueuePanel(Queue<java.lang.Process> data, String name, int maxVisibleLength, Direction direction) {
+    QueuePanel(LinkedList<java.lang.Process> data, String name, int maxVisibleLength, Direction direction) {
         this.data = data;
         this.name = name;
         this.maxVisibleLength = maxVisibleLength;

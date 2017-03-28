@@ -1,6 +1,7 @@
 package P3;
 
 import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * This class implements functionality associated with
@@ -13,8 +14,14 @@ public class Cpu {
      * @param maxCpuTime	The Round Robin time quant to be used.
      * @param statistics	A reference to the statistics collector.
      */
+    private Queue<Process> cpuQueue;
+    private Statistics statistics;
+    private long maxCpuTime;
+
     public Cpu(LinkedList<Process> cpuQueue, long maxCpuTime, Statistics statistics) {
-        // Incomplete
+        this.cpuQueue = cpuQueue;
+        this.maxCpuTime = maxCpuTime;
+        this.statistics = statistics;
     }
 
     /**
@@ -26,7 +33,8 @@ public class Cpu {
      *				or null	if no process was activated.
      */
     public Event insertProcess(Process p, long clock) {
-        // Incomplete
+        this.cpuQueue.add(p);
+        //sjekk om cpu e idle, activate first return null if not
         return null;
     }
 
@@ -61,6 +69,10 @@ public class Cpu {
     public Process getActiveProcess() {
         // Incomplete
         return null;
+    }
+
+    public boolean isIdle(){
+        return this.getActiveProcess() == null;
     }
 
     /**
